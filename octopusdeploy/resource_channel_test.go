@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -187,10 +187,10 @@ func testAccChannelBasic(name, description string) string {
 		resource "octopusdeploy_project" "foo" {
 			name           	= "funky project"
 			lifecycle_id	= "Lifecycles-1"
-			project_group_id = "${octopusdeploy_project_group.foo.id}" 	
+			project_group_id = "${octopusdeploy_project_group.foo.id}"
 			allow_deployments_to_no_targets = true
 		}
-		
+
 		resource "octopusdeploy_channel" "ch" {
 			name           	= "%s"
 			description    	= "%s"
@@ -211,7 +211,7 @@ func testAccChannelWithOneRule(name, description, versionRange, actionName strin
 		resource "octopusdeploy_project" "foo" {
 			name           	= "funky project"
 			lifecycle_id	= "Lifecycles-1"
-			project_group_id = "${octopusdeploy_project_group.foo.id}" 	
+			project_group_id = "${octopusdeploy_project_group.foo.id}"
 			allow_deployments_to_no_targets = true
 		}
 
@@ -223,12 +223,12 @@ func testAccChannelWithOneRule(name, description, versionRange, actionName strin
 				action {
 					name 		= "%s"
 					action_type = "Octopus.TentaclePackage"
-		
+
 					property {
 						key 	= "Octopus.Action.Package.FeedId"
 						value 	= "feeds-builtin"
 					}
-		
+
 					property {
 						key 	= "Octopus.Action.Package.PackageId"
 						value 	= "#{PackageName}"
@@ -236,14 +236,14 @@ func testAccChannelWithOneRule(name, description, versionRange, actionName strin
 				}
 			}
 		}
-		
+
 		resource "octopusdeploy_channel" "ch" {
 			name           	= "%s"
 			description    	= "%s"
 			project_id		= "${octopusdeploy_project.foo.id}"
 			rule	{
 				version_range 	= "%s"
-				actions 		= ["%s"] 
+				actions 		= ["%s"]
 			}
 			depends_on = ["octopusdeploy_deployment_process.deploy_step_template"]
 		}
@@ -262,7 +262,7 @@ func testAccChannelWithtwoRules(name, description, versionRange1, actionName1, v
 		resource "octopusdeploy_project" "foo" {
 			name           	= "funky project"
 			lifecycle_id	= "Lifecycles-1"
-			project_group_id = "${octopusdeploy_project_group.foo.id}" 	
+			project_group_id = "${octopusdeploy_project_group.foo.id}"
 			allow_deployments_to_no_targets = true
 		}
 
@@ -274,28 +274,28 @@ func testAccChannelWithtwoRules(name, description, versionRange1, actionName1, v
 				action {
 					name 		= "%s"
 					action_type = "Octopus.TentaclePackage"
-		
+
 					property {
 						key 	= "Octopus.Action.Package.FeedId"
 						value 	= "feeds-builtin"
 					}
-		
+
 					property {
 						key 	= "Octopus.Action.Package.PackageId"
 						value 	= "#{PackageName}"
 					}
 
 				}
-				
+
 				action {
 					name 		= "%s"
 					action_type = "Octopus.TentaclePackage"
-		
+
 					property {
 						key 	= "Octopus.Action.Package.FeedId"
 						value 	= "feeds-builtin"
 					}
-		
+
 					property {
 						key 	= "Octopus.Action.Package.PackageId"
 						value 	= "#{PackageName}"
@@ -304,19 +304,19 @@ func testAccChannelWithtwoRules(name, description, versionRange1, actionName1, v
 				}
 			}
 		}
-		
+
 		resource "octopusdeploy_channel" "ch" {
 			name           	= "%s"
 			description    	= "%s"
 			project_id		= "${octopusdeploy_project.foo.id}"
 			rule {
 				version_range 	= "%s"
-				actions 		= ["%s"] 
+				actions 		= ["%s"]
 			}
-			
+
 			rule {
 				version_range 	= "%s"
-				actions 		= ["%s"] 
+				actions 		= ["%s"]
 			}
 
 			depends_on = ["octopusdeploy_deployment_process.deploy_step_template"]

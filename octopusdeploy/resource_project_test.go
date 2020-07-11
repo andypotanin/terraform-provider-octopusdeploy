@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )

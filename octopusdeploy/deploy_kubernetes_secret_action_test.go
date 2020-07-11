@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -30,7 +30,7 @@ func testAccDeployKuberentesSecretAction() string {
 		deploy_kubernetes_secret_action {
             name = "Run Script"
             run_on_server = true
-			
+
 			secret_name = "secret name"
 
 			secret_values {

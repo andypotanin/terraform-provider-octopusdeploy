@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
-func getDeployKubernetesSecretActionSchema() *schema.Schema {
+func getDeployTransactJiraGateActionSchema() *schema.Schema {
 
 	actionSchema, element := getCommonDeploymentActionSchema()
 	addExecutionLocationSchema(element)
@@ -36,7 +36,7 @@ func getDeployKubernetesSecretActionSchema() *schema.Schema {
 	return actionSchema
 }
 
-func buildDeployKubernetesSecretActionResource(tfAction map[string]interface{}) octopusdeploy.DeploymentAction {
+func buildDeployTransactJiraGateActionResource(tfAction map[string]interface{}) octopusdeploy.DeploymentAction {
 	resource := buildDeploymentActionResource(tfAction)
 
 	resource.ActionType = "Octopus.KubernetesDeploySecret"

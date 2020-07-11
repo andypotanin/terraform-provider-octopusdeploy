@@ -3,13 +3,13 @@ package octopusdeploy
 import (
 	"fmt"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
 func resourceFeed() *schema.Resource {
 	return &schema.Resource{
-		DeprecationMessage: "use type-specific feed resources instead (ex: octopusdeploy_nuget_feed, etc",
+		//DeprecationMessage: "use type-specific feed resources instead (ex: octopusdeploy_nuget_feed, etc",
 		Create:             resourceFeedCreate,
 		Read:               resourceFeedRead,
 		Update:             resourceFeedUpdate,

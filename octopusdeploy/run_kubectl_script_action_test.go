@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -30,12 +30,12 @@ func testAccRunKubectlScriptAction() string {
 		run_kubectl_script_action {
             name = "Run Script"
             run_on_server = true
-			
+
 			primary_package {
 				package_id = "MyPackage"
 				feed_id = "feeds-builtin"
 			}
-			
+
 			script_file_name = "Test.ps1"
 			script_parameters = "-Test 1"
         }

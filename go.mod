@@ -1,7 +1,7 @@
 module github.com/OctopusDeploy/terraform-provider-octopusdeploy
 
 require (
-	github.com/OctopusDeploy/go-octopusdeploy v1.6.0
+	github.com/andypotanin/go-octopusdeploy v1.6.3-0.20200711115500-1c9744c3c770
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/terraform v0.12.5
 	github.com/hashicorp/yamux v0.0.0-20180917205041-7221087c3d28 // indirect

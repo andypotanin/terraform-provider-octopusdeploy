@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -52,7 +52,7 @@ func testAccDeploymentProcessBasic() string {
 				condition_expression = "#{run}"
 				start_trigger = "StartWithPrevious"
 				window_size = "5"
-				
+
 
 				action {
 					name = "Test"
@@ -64,7 +64,7 @@ func testAccDeploymentProcessBasic() string {
 					//excluded_environments = ["Environments-2"]
 					//channels = ["Channels-1"]
 					//tenant_tags = ["tag/tag"]
-					
+
 					primary_package {
 						package_id = "MyPackage"
 						feed_id = "feeds-builtin"
@@ -114,18 +114,18 @@ func testAccDeploymentProcessBasic() string {
  			step {
  			       name = "Step2"
  			       start_trigger = "StartWithPrevious"
-			
+
  			       action {
  			           name = "Step2"
  			           action_type = "Octopus.Script"
  			           run_on_server = true
-			
+
  			           property {
  			               key = "Octopus.Action.Script.ScriptBody"
  			               value = "Write-Host 'hi'"
  			           }
  			       }
-			} 
+			}
 		}
 		`
 }

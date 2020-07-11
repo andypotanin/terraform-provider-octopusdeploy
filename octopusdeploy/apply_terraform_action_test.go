@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -30,12 +30,12 @@ func testAccApplyTerraformAction() string {
 		apply_terraform_action {
             name = "Apply Terraform"
             run_on_server = true
-			
+
 			primary_package {
 				package_id = "MyPackage"
 				feed_id = "feeds-builtin"
 			}
-			
+
 			additional_init_params = "Init params"
         }
 	`)

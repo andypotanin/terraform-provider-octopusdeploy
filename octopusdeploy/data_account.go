@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/schema"
 )
 

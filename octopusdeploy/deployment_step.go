@@ -1,7 +1,7 @@
 package octopusdeploy
 
 import (
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/schema"
 	"strings"
 )
@@ -76,6 +76,7 @@ func getDeploymentStepSchema() *schema.Schema {
 				"run_script_action":               getRunScriptActionSchema(),
 				"run_kubectl_script_action":       getRunRunKubectlScriptSchema(),
 				"deploy_kubernetes_secret_action": getDeployKubernetesSecretActionSchema(),
+				"deploy_transact_jira_gate": 	   getDeployTransactJiraGateActionSchema(),
 			},
 		},
 	}
@@ -157,6 +158,13 @@ func buildDeploymentStepResource(tfStep map[string]interface{}) octopusdeploy.De
 	if attr, ok := tfStep["deploy_kubernetes_secret_action"]; ok {
 		for _, tfAction := range attr.([]interface{}) {
 			action := buildDeployKubernetesSecretActionResource(tfAction.(map[string]interface{}))
+			step.Actions = append(step.Actions, action)
+		}
+	}
+
+	if attr, ok := tfStep["deploy_transact_jira_gate_action"]; ok {
+		for _, tfAction := range attr.([]interface{}) {
+			action := buildDeployTransactJiraGateActionResource(tfAction.(map[string]interface{}))
 			step.Actions = append(step.Actions, action)
 		}
 	}

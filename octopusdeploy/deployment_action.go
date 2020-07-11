@@ -1,7 +1,7 @@
 package octopusdeploy
 
 import (
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/schema"
 	"strconv"
 )
@@ -16,6 +16,7 @@ func getDeploymentActionSchema() *schema.Schema {
 		Description: "The type of action",
 		Required:    true,
 	}
+	addContainerSchema(element)
 	addWorkerPoolSchema(element)
 	addPackagesSchema(element, false)
 
@@ -112,6 +113,19 @@ func addWorkerPoolSchema(element *schema.Resource) {
 	}
 }
 
+func addContainerSchema(element *schema.Resource) {
+	element.Schema["container_image_id"] = &schema.Schema{
+		Type:        schema.TypeString,
+		Description: "ID of docker container image to use",
+		Optional:    true,
+	}
+	element.Schema["container_image_feed_id"] = &schema.Schema{
+		Type:        schema.TypeString,
+		Description: "ID of docker container image to use",
+		Optional:    true,
+	}
+}
+
 func buildDeploymentActionResource(tfAction map[string]interface{}) octopusdeploy.DeploymentAction {
 	action := octopusdeploy.DeploymentAction{
 		Name:                 tfAction["name"].(string),
@@ -139,6 +153,18 @@ func buildDeploymentActionResource(tfAction map[string]interface{}) octopusdeplo
 	workerPoolID := tfAction["worker_pool_id"]
 	if workerPoolID != nil {
 		action.WorkerPoolId = workerPoolID.(string)
+	}
+
+	containerImage := tfAction["container_image_id"]
+	containerImageFeedId := tfAction["container_image_feed_id"]
+
+	if containerImage != nil {
+		// action.ContainerImage = containerImage.(string)
+		action.Container =	map[string]string{
+			"Image":  containerImage.(string),
+			"FeedId":  containerImageFeedId.(string),
+		}
+
 	}
 
 	if primaryPackage, ok := tfAction["primary_package"]; ok {

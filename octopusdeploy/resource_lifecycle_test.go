@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/OctopusDeploy/go-octopusdeploy/octopusdeploy"
+	"github.com/andypotanin/go-octopusdeploy/octopusdeploy"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
 )
@@ -116,7 +116,7 @@ func testAccLifecycleWithDescription(name, description string) string {
 func testAccLifecycleComplex() string {
 	return `
         resource "octopusdeploy_environment" "Env1" {
-           name =  "LifecycleTestEnv1"        
+           name =  "LifecycleTestEnv1"
         }
 
         resource "octopusdeploy_environment" "Env2" {
