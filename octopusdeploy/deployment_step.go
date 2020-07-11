@@ -76,7 +76,7 @@ func getDeploymentStepSchema() *schema.Schema {
 				"run_script_action":               getRunScriptActionSchema(),
 				"run_kubectl_script_action":       getRunRunKubectlScriptSchema(),
 				"deploy_kubernetes_secret_action": getDeployKubernetesSecretActionSchema(),
-				"deploy_transact_jira_gate": 	   getDeployTransactJiraGateActionSchema(),
+				"deploy_transact_jira_gate_action":  getDeployTransactJiraGateActionSchema(),
 			},
 		},
 	}

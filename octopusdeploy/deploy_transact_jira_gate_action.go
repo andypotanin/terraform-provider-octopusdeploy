@@ -10,15 +10,15 @@ func getDeployTransactJiraGateActionSchema() *schema.Schema {
 
 	actionSchema, element := getCommonDeploymentActionSchema()
 	addExecutionLocationSchema(element)
-	element.Schema["secret_name"] = &schema.Schema{
+	element.Schema["auth_key"] = &schema.Schema{
 		Type:        schema.TypeString,
 		Description: "The name of the secret resource",
 		Required:    true,
 	}
 
-	element.Schema["secret_values"] = &schema.Schema{
+	element.Schema["required_status"] = &schema.Schema{
 		Type:     schema.TypeList,
-		Required: true,
+		Optional: true,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
 				"key": {
@@ -39,11 +39,14 @@ func getDeployTransactJiraGateActionSchema() *schema.Schema {
 func buildDeployTransactJiraGateActionResource(tfAction map[string]interface{}) octopusdeploy.DeploymentAction {
 	resource := buildDeploymentActionResource(tfAction)
 
-	resource.ActionType = "Octopus.KubernetesDeploySecret"
+	resource.ActionType = "Octopus.Script"
 
-	resource.Properties["Octopus.Action.KubernetesContainers.SecretName"] = tfAction["secret_name"].(string)
+	resource.Properties["Octopus.Action.JiraGate.AuthKey"] = tfAction["auth_key"].(string)
 
-	if tfSecretValues, ok := tfAction["secret_values"]; ok {
+	//resource.Properties["Octopus.Action.Script.ScriptBody"] = "Write-Host 'hi'".(string)
+
+
+	if tfSecretValues, ok := tfAction["required_status"]; ok {
 
 		secretValues := make(map[string]string)
 
@@ -54,7 +57,7 @@ func buildDeployTransactJiraGateActionResource(tfAction map[string]interface{}) 
 
 		j, _ := json.Marshal(secretValues)
 
-		resource.Properties["Octopus.Action.KubernetesContainers.SecretValues"] = string(j)
+		resource.Properties["Octopus.Action.JiraGate.RequiredStatus"] = string(j)
 	}
 
 	return resource
