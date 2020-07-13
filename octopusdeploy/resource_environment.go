@@ -31,6 +31,11 @@ func resourceEnvironment() *schema.Resource {
 				Optional: true,
 				Default:  false,
 			},
+			"sort_order": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  false,
+			},
 			"allow_dynamic_infrastructure": {
 				Type:     schema.TypeBool,
 				Optional: true,
@@ -59,6 +64,7 @@ func resourceEnvironmentRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("description", env.Description)
 	d.Set("use_guided_failure", env.UseGuidedFailure)
 	d.Set("allow_dynamic_infrastructure", env.AllowDynamicInfrastructure)
+	d.Set("sort_order", env.SortOrder)
 
 	return nil
 }
@@ -80,6 +86,7 @@ func buildEnvironmentResource(d *schema.ResourceData) *octopusdeploy.Environment
 		envGuided = envGuidedInterface.(bool)
 	}
 
+
 	allowDynamicInfrastructureInterface, ok := d.GetOk("allow_dynamic_infrastructure")
 	if ok {
 		envDynamic = allowDynamicInfrastructureInterface.(bool)
@@ -87,6 +94,12 @@ func buildEnvironmentResource(d *schema.ResourceData) *octopusdeploy.Environment
 
 	var environment = octopusdeploy.NewEnvironment(envName, envDesc, envGuided)
 	environment.AllowDynamicInfrastructure = envDynamic
+
+	envSortOrder, ok := d.GetOk("sort_order")
+	if ok {
+		environment.SortOrder = envSortOrder.(int)
+	}
+
 
 	return environment
 }
